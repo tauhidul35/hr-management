@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  timeout: 5000
+
+development:
+  <<: *default
+  database: hr_misfit_tech_development
+
+production:
+  <<: *default
+  database: hr_misfit_tech_production
+  username: hr_misfit_tech
+  password: <%= ENV['HR_MISFIT_TECH_DATABASE_PASSWORD'] %>
