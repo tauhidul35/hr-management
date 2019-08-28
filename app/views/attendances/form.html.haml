@@ -1,0 +1,3 @@
+= form_tag attendances_upload_path, multipart: true do
+  = file_field_tag 'file', type: 'file'
+  = submit_tag 'Upload'

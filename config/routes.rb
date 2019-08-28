@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'home#index'
+
+  # Attendances
+  get 'attendances', to: 'attendances#index'
+  get 'attendances/form', to: 'attendances#form'
+  post 'attendances/upload', to: 'attendances#upload'
 end
