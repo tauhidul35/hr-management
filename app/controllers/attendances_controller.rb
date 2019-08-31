@@ -1,18 +1,24 @@
 class AttendancesController < ApplicationController
+  before_action :authenticate_employee!
+
   def index; end
 
   def form; end
 
   def upload
-    file_data = params[:file]
-    if file_data.respond_to?(:read)
-      contents = file_data.read
-    elsif file_data.respond_to?(:path)
-      contents = File.read(file_data.path)
-    else
-      logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
+    unless params[:file].respond_to?(:read)
+      flash[:error] = 'File did not selected or bad file.'
+      redirect_back fallback_location: root_url, allow_other_host: false
     end
 
+    save_record(params[:file].read)
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  private
+
+  def save_record(contents)
     contents.each_line do |line|
       data = line.strip.split(/ /)
 
@@ -24,16 +30,5 @@ class AttendancesController < ApplicationController
         time: data[2]
       )
     end
-
-    redirect_back(fallback_location: root_path)
-  end
-
-  private
-
-  def integer?(string)
-    Integer(string)
-    true
-  rescue
-    false
   end
 end

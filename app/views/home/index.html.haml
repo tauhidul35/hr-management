@@ -1,1 +1,5 @@
-= link_to 'Add Attendances', attendances_form_path
+- if employee_signed_in?
+  = link_to 'Logout', destroy_employee_session_path, method: :delete
+  = link_to 'Add Attendances', attendances_form_path
+- else
+  = link_to 'Login', employee_google_oauth2_omniauth_authorize_path

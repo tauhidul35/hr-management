@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_181845) do
+ActiveRecord::Schema.define(version: 2019_08_31_022021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,32 @@ ActiveRecord::Schema.define(version: 2019_08_28_181845) do
     t.integer "emp_id"
     t.date "date"
     t.time "time"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "emp_id"
+    t.integer "att_device_id"
+    t.string "name"
+    t.string "phone"
+    t.date "joining_date"
+    t.string "designation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "provider"
+    t.string "uid"
+    t.string "token"
+    t.integer "expires_at"
+    t.boolean "expires"
+    t.string "refresh_token"
+    t.index ["email"], name: "index_employees_on_email", unique: true
   end
 
 end
