@@ -3,7 +3,7 @@ module Employees
     def google_oauth2
       @employee = Employee.from_omniauth(request.env['omniauth.auth'])
       if @employee.persisted?
-        sign_in @employee, event: :authentication # this will throw if @employee is not activated
+        sign_in @employee, event: :authentication
         set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
       else
         session['devise.google_data'] = request.env['omniauth.auth']
