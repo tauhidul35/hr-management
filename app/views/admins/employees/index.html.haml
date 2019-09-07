@@ -1,0 +1,5 @@
+= link_to 'Add Employee', new_admins_employee_path
+%h2 Employee List
+%ul
+  - @employees.each do |employee|
+    %li= link_to employee.name, admins_employee_path(employee)

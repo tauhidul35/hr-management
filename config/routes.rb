@@ -4,10 +4,19 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'employees/omniauth_callbacks'
   }
 
-  # Attendances
-  get 'attendances', to: 'attendances#index'
-  get 'attendances/form', to: 'attendances#form'
-  post 'attendances/upload', to: 'attendances#upload'
+  namespace :admins do
+    resources :dashboard, only: [:index]
+    resources :employees
+
+    resources :attendances, only: [:index] do
+      collection do
+        get :form
+        post :upload
+      end
+    end
+  end
+
+  resources :attendances, only: [:index]
 
   root to: 'home#index'
 end
