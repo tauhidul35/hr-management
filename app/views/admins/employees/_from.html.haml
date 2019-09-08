@@ -1,7 +1,36 @@
-= form_with model: [:admins, @employee] do |f|
-  = f.text_field :emp_id, lable: 'Employee ID'
-  = f.number_field :att_device_id
-  = f.text_field :name
-  = f.email_field :email
-  = f.date_field :joining_date
-  = f.text_field :designation
+.col-6
+  = display_error_of(@employee).html_safe
+  = form_with model: [:admins, @employee] do |f|
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: 'inputEmployeeId'} Employee ID
+      .col-sm-9
+        = f.text_field :emp_id, class: 'form-control', id: 'inputEmployeeId', aria: {describedby: 'empIdHelp'}, placeholder: 'MIS-2019/01'
+        %small.form-text.text-muted#empIdHelp Employee ID help you to trace a employee easily.
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: "inputDevice"} Device Id
+      .col-sm-9
+        = f.number_field :att_device_id, class: 'form-control', id: 'inputDeviceId', aria: {describedby: 'deviceIdHelp'}, placeholder: '10'
+        %small.form-text.text-muted#deviceIdHelp This is an auto generated ID on attendance device. Collect this ID from device.
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: "inputName"} Full Name
+      .col-sm-9
+        = f.text_field :name, class: 'form-control', id: 'inputName', aria: {describedby: 'nameHelp'}, placeholder: 'Tauhidul Islam'
+        %small.form-text.text-muted#nameHelp Enter employee's full name (with nick name)
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: "inputEmail"} Email
+      .col-sm-9
+        = f.email_field :email, class: 'form-control', id: 'inputEmail', aria: {describedby: 'emailHelp'}, placeholder: 'tauhidul@misfit.tech'
+        %small.form-text.text-muted#emailHelp Employee company email address (Personal email for interns).
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: "inputJoiningDate"} Joining Date
+      .col-sm-9
+        = f.date_field :joining_date, class: 'form-control', id: 'inputJoiningDate', aria: {describedby: 'joiningDateHelp'}, placeholder: 'mm/dd/yyyy'
+        %small.form-text.text-muted#joiningDateHelp Date of first day employee join with company
+    .form-group.row
+      %label.col-sm-3.col-form-label{for: "inputDesignation"} Designation
+      .col-sm-9
+        = f.text_field :designation, class: 'form-control', id: 'inputDesignation', aria: {describedby: 'designationHelp'}, placeholder: 'Junior Software Engineer'
+        %small.form-text.text-muted#designationHelp Designation of employee. Update it each time of his promotion.
+    .form-group.row
+      .col-sm-9.offset-sm-3
+        = f.submit 'Submit', class: 'btn btn-primary'

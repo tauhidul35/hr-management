@@ -18,3 +18,4 @@ require("channels")
 
 import '../stylesheets/application.scss'
 import 'bootstrap/dist/js/bootstrap'
+import './turbolinks_custom'

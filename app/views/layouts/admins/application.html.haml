@@ -6,6 +6,8 @@
     = csp_meta_tag
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   %body
-    %p.alert= alert
+    - flash.each do |key, value|
+      .alert{role: 'alert', class: "alert-#{key}"}= value
+
     = yield
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'

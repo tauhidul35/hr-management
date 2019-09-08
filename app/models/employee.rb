@@ -5,6 +5,8 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :trackable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  validates :email, presence: true, uniqueness: true
+
   def self.from_omniauth(auth)
     employee = find_by(email: auth.info.email)
     employee ||= new(email: auth.info.email)

@@ -12,7 +12,14 @@ module Admins
       @employee = Employee.new
     end
 
-    def create; end
+    def create
+      @employee = Employee.new(employee_params)
+      if @employee.save
+        redirect_to admins_employee_path @employee
+      else
+        render :new
+      end
+    end
 
     def edit; end
 
@@ -24,6 +31,11 @@ module Admins
 
     def set_employee
       @employee = Employee.find(params[:id])
+    end
+
+    def employee_params
+      params.require(:employee).permit(:emp_id, :att_device_id, :name, :email,
+                                       :joining_date, :designation)
     end
   end
 end
